@@ -1,0 +1,19 @@
+name: "Docker deploy"
+inputs:
+  app-name:
+    required: true
+  remote:
+    required: false
+    default: origin
+  branch:
+    required: false
+    default: main
+runs:
+  using: composite
+  steps:
+    - run: |
+        cd ~/{{ inputs.app-name }}
+        git fetch --all
+        git reset --hard {{ inputs.remote }}/{{ inputs.branch }}
+        docker-compose down
+        docker-compose up -d --build
