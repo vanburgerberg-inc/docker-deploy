@@ -13,7 +13,7 @@ runs:
   steps:
     - shell: bash
       run: |
-        cd ~/${{ inputs.app-name }}
+        cd ~/apps/${{ inputs.app-name }}
         git fetch --all
         git reset --hard ${{ inputs.remote }}/${{ inputs.branch }}
         docker-compose down
